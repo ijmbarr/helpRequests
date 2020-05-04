@@ -87,12 +87,13 @@ function buildReplier(channelid, userid) {
   // replier = buildReplier(...);
   // return replier(message);
 
-  var webhook_chatPostMessage = globalVariables()['WEBHOOK_CHATPOSTMESSAGE_EPHEMERAL'];
+  var webhook_chatPostMessage = globalVariables()['WEBHOOK_CHATPOSTMESSAGE'];
   var access_token = PropertiesService.getScriptProperties().getProperty('ACCESS_TOKEN'); 
   
   return function(message){
-    message["channel"] = channlid;
+    message["channel"] = channelid;
     message["user"] = userid;
+    message["response_type"] = "ephemeral";
     var options = {
         method: "post",
         contentType: 'application/json; charset=utf-8',
@@ -100,10 +101,10 @@ function buildReplier(channelid, userid) {
         payload: JSON.stringify(message)
     };
     
-    // Send post request to Slack chat.postMessage API
     var return_message = UrlFetchApp.fetch(webhook_chatPostMessage, options).getContentText();
     
-    // Log results.
-  
+    // update log sheet
+    var log_sheet = new LogSheetWrapper();
+    log_sheet.appendRow([new Date(), "", 'admin','replierPoster', return_message]);
   }
 }

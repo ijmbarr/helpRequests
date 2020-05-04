@@ -62,7 +62,11 @@ function volunteer (uniqueid, channelid, userid, username){
   log_sheet.appendRow([new Date(), uniqueid, 'admin','confirmVolunteer', return_message]);   
 
   // return private message to user
-  return contentServerJsonReply(cmd_check.msg);
+//  return contentServerJsonReply(cmd_check.msg);
+  
+  // If everything has gone well we can just replace the contentServer
+  // objects with this
+  return replier(JSON.parse(cmd_check.msg));
 }
 
 

@@ -1,6 +1,20 @@
 function doPost(e) { // catches slack slash commands
+  
+  //Checks need to be added.
+  
+  // This needs to be made async.
+  doPostAsync(e);
+  
+  // A sensible reply should be added.
+
+}
+
+// Global variables are usually bad, but this allows us to avoid passing object around all requests.
+var replier = null;
+
+function doPostAsync(e){
   if (typeof e !== 'undefined') {
-    
+       
     // extract message body
     var par = e.parameter; 
     
@@ -9,6 +23,11 @@ function doPost(e) { // catches slack slash commands
     if (payload){ // if payload exists, this is a POST request from a slack interactive component
       return handleSlackInteractiveMessages(JSON.parse(payload));
     } else{ // else, this is a POST request from a slack slash command
+      
+      // Create the reply object.
+      // Need to do something sensible with the interactive message...
+      replier =  buildReplier(par.channel_id, par.user_id);
+      
       return handleSlackCommands(par);
     }
         
