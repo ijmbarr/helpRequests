@@ -87,7 +87,7 @@ function buildReplier(channelid, userid) {
   // replier = buildReplier(...);
   // return replier(message);
 
-  var webhook_chatPostMessage = globalVariables()['WEBHOOK_CHATPOSTMESSAGE'];
+  var webhook_chatPostMessage = globalVariables()['WEBHOOK_CHATPOSTMESSAGE_EPHEMERAL'];
   var access_token = PropertiesService.getScriptProperties().getProperty('ACCESS_TOKEN'); 
   
   return function(message){
