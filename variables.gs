@@ -54,7 +54,8 @@ function globalVariables(){
       "completionLastTimestamp",
       "completionLastDetails"],
     
-    WEBHOOK_CHATPOSTMESSAGE: 'https://slack.com/api/chat.postMessage'
+    WEBHOOK_CHATPOSTMESSAGE: 'https://slack.com/api/chat.postMessage',
+    WEBHOOK_CHATPOSTMESSAGE_EPHEMERAL: 'https://slack.com/api/chat.postEphemeral',
   };
   return globvar;
 }

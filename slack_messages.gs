@@ -74,3 +74,36 @@ function volunteerSuccessReply(slackurl, uniqueid, requesterName, mention_reques
 	]      
   });
 }
+
+
+function buildReplier(channelid, userid) {
+  // Builds a function to mimic the action of ContentService via a post request.
+  // Message is expected to be in the format { blocks: [...] }
+  //
+  // Use in conjunction with `return` to ensure that the rest of the function is
+  // not executed.
+  //
+  // Example:
+  // replier = buildReplier(...);
+  // return replier(message);
+
+  var webhook_chatPostMessage = globalVariables()['WEBHOOK_CHATPOSTMESSAGE_EPHEMERAL'];
+  var access_token = PropertiesService.getScriptProperties().getProperty('ACCESS_TOKEN'); 
+  
+  return function(message){
+    message["channel"] = channlid;
+    message["user"] = userid;
+    var options = {
+        method: "post",
+        contentType: 'application/json; charset=utf-8',
+        headers: {Authorization: 'Bearer ' + access_token},
+        payload: JSON.stringify(message)
+    };
+    
+    // Send post request to Slack chat.postMessage API
+    var return_message = UrlFetchApp.fetch(webhook_chatPostMessage, options).getContentText();
+    
+    // Log results.
+  
+  }
+}
